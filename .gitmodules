@@ -1,0 +1,3 @@
+[submodule "tools/websocket-server/php"]
+	path = tools/websocket-server/php
+	url = https://github.com/volca/php-websocket-server.git
