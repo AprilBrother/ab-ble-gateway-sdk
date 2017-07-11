@@ -8,6 +8,7 @@ git clone --recursive https://github.com/AprilBrother/ab-ble-gateway-sdk.git
 
 * WebSocket server written in PHP
 * HTTP server written in nodejs
+* HTTP server written in JAVA
 
 ## SDK for AB BLE Gateway
 
