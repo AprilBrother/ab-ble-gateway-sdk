@@ -9,7 +9,7 @@
 4. Under the demo directory, the new Servlet is named Parse
 5. copy Parse.java to the demo directory to cover the newly created Parse
 
-### Chinese Version ###
+### 中文版 ###
 
 1. 安装myEclipse
 2. 新建web project
