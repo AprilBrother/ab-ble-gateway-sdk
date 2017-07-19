@@ -11,6 +11,7 @@ git clone --recursive https://github.com/AprilBrother/ab-ble-gateway-sdk.git
 * HTTP server written in JAVA
 * MQTT subscriber written in nodejs
 * MQTT subscriber written in PHP
+* [A parser](https://gist.github.com/lemonadezZ/9823150b1f4c2c456423fdc6619f44d5) written in python 2.7
 
 ## SDK for AB BLE Gateway
 
