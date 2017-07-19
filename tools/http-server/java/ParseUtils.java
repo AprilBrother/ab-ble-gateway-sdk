@@ -84,7 +84,7 @@ public class ParseUtils {
 	 * 
 	 * change HexString to String the result is head
 	 * 
-	 * 通过0A0D分割后的第一个数据 是head
+	 * 通过0D0A分割后的第一个数据 是head
 	 * 
 	 * 讲HexString转为String 就是head
 	 * 
