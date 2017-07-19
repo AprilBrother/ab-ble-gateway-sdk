@@ -16,3 +16,4 @@ git clone --recursive https://github.com/AprilBrother/ab-ble-gateway-sdk.git
 ## SDK for AB BLE Gateway
 
 * [PHP SDK](https://github.com/AprilBrother/ab-ble-gateway-sdk-php)
+* [NodeJS SDK](https://github.com/AprilBrother/ab-ble-gateway-sdk-nodejs)
