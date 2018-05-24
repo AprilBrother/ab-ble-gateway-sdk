@@ -25,6 +25,11 @@ const server = http.createServer((req, res) => {
         }
         break;
     }
+
+    if (data == null) {
+        return;
+    }
+
     data = data.toString('hex');
     const head = decodeURIComponent(data.match(/^7b\S+0d0a0d0a/)[0].replace(/(\w{2})/g, '%$1'));
     data = data.replace(head, '');
