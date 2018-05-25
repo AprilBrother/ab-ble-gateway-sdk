@@ -4,7 +4,10 @@ Http server for Gateway v4
 
 ## Requirement ##
 
-Install nodejs first
+* Install nodejs and yarn
+* ```
+yarn install
+```
 
 ## How To Run ##
 

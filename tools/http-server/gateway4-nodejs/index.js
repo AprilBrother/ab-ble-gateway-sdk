@@ -1,7 +1,5 @@
 const http = require('http');
-const msgpack = require('msgpack5')() // namespace our extensions
-  , encode  = msgpack.encode
-  , decode  = msgpack.decode;
+const msgpack = require('msgpack5')();
 
 const server = http.createServer((req, res) => {
   const chunks = [];
@@ -33,13 +31,8 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    data = data.toString('hex');
-    const head = decodeURIComponent(data.match(/^7b\S+0d0a0d0a/)[0].replace(/(\w{2})/g, '%$1'));
-    data = data.replace(head, '');
-    data = data.replace(/(0d0a)/gm, '$1\n');
-    const bles = data.match(/fe\w+0d0a/gm);
-    console.log(head)   // 元数据
-    console.log(bles)   // 扫描到的蓝牙设备数据
+    data = msgpack.decode(data);
+    console.log(data);
     res.end('post')
   });
 });
