@@ -1,5 +1,10 @@
+## Warning
+
+The example is unfinished. 
 
 ## How To Use ##
+
+* Please download [the msgpack library](https://github.com/msgpack/msgpack-java) first
 
 ### English Version ###
 
