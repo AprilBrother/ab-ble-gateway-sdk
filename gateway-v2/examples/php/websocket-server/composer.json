@@ -1,0 +1,11 @@
+{
+	"require": {
+		"aprbrother/ab-ble-gateway": "dev-master"
+	},
+	"repositories": {
+		"packagist": {
+			"type": "composer",
+			"url": "https://packagist.phpcomposer.com"
+		}
+	}
+}
