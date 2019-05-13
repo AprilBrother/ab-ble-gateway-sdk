@@ -17,14 +17,17 @@ def on_message(mosq, obj, msg):
       print "adv:", hex_chars
 
 def on_connect(mosq, obj,flags, rc):
+    mqttTopic = "hello"
     print("Connected with result code "+str(rc))
-    mqttc.subscribe("hello", 0)
+    mqttc.subscribe(mqttTopic, 0)
     print("Connected")
 
 
+mqttHost    = "mqtt.bconimg.com"
+mqttPort    = 1883
 mqttc = mqtt.Client()
 mqttc.on_connect = on_connect
 mqttc.on_subscribe = on_subscribe
 mqttc.on_message = on_message
-mqttc.connect("mqtt.bconimg.com", 1883, 60)
+mqttc.connect(mqttHost, mqttPort, 60)
 mqttc.loop_forever()
