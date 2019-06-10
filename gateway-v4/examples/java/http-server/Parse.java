@@ -11,7 +11,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 
         MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(in);
 
-        intmaplen = unpacker.unpackMapHeader();
+        int maplen = unpacker.unpackMapHeader();
 
         System.out.println("key:"+ unpacker.unpackString());
 
@@ -35,15 +35,15 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
 
         System.out.println("key:"+ unpacker.unpackString());
 
-        intarrHeader = unpacker.unpackArrayHeader();
+        int arrHeader = unpacker.unpackArrayHeader();
 
         System.out.println("value BinaryHeader:"+ arrHeader);
 
-        for(inti = 0; i < arrHeader; i++) {
+        for(int i = 0; i < arrHeader; i++) {
 
-            intbinaryHeader = unpacker.unpackBinaryHeader();
+            int binaryHeader = unpacker.unpackBinaryHeader();
 
-            byte[] bytes = newbyte[binaryHeader];
+            byte[] bytes = new byte[binaryHeader];
 
             unpacker.readPayload(bytes);
 
@@ -58,21 +58,20 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
     }
 
 
-
-public static String bytes2HexStr(byte[] bytes) {
-
-    char[] hexChars = newchar[bytes.length * 2];
-
-    for(intj = 0; j < bytes.length; j++) {
-
-        intv = bytes[j] & 0xFF;
-
-        hexChars[j * 2] = hexArray[v >>> 4];
-
-        hexChars[j * 2+ 1] = hexArray[v & 0x0F];
-
+    /*输入16进制byte[]输出16进制字符串*/
+    public static String bytes2HexStr(byte[] byteArray) {
+        if (byteArray == null) {
+            return null;
+        }
+        char[] hexArray = "0123456789ABCDEF".toCharArray();
+        char[] hexChars = new char[byteArray.length * 2];
+        for (int j = 0; j < byteArray.length; j++) {
+            int v = byteArray[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
     }
 
-    returnnewString(hexChars);
 
 }
