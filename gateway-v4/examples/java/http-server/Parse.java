@@ -1,37 +1,78 @@
-package demo;
+import org.msgpack.core.MessagePack;
+import org.msgpack.core.MessageUnpacker;
 
-import java.io.IOException;
-import java.io.InputStream;
+public void doPost(HttpServletRequest request, HttpServletResponse response)
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+    throws ServletException, IOException {
 
-public class Parse extends HttpServlet {
+        System.out.println("doPost");
 
-	public Parse() {
-		super();
-	}
+        InputStream in = request.getInputStream();
 
-	public void destroy() {
-		super.destroy();
-	}
+        MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(in);
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		InputStream in = null;
-		try {
-			in = request.getInputStream();
-			String parseReslut = ParseUtils.parse(in);
-			System.out.println(parseReslut);
-			System.out.println("-----------");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        intmaplen = unpacker.unpackMapHeader();
 
-	}
+        System.out.println("key:"+ unpacker.unpackString());
 
-	public void init() throws ServletException {
-	}
+        System.out.println("value:"+ unpacker.unpackString());
+
+        System.out.println("key:"+ unpacker.unpackString());
+
+        System.out.println("value:"+ unpacker.unpackInt());
+
+        System.out.println("key:"+ unpacker.unpackString());
+
+        System.out.println("value:"+ unpacker.unpackInt());
+
+        System.out.println("key:"+ unpacker.unpackString());
+
+        System.out.println("value:"+ unpacker.unpackString());
+
+        System.out.println("key:"+ unpacker.unpackString());
+
+        System.out.println("value:"+ unpacker.unpackString());
+
+        System.out.println("key:"+ unpacker.unpackString());
+
+        intarrHeader = unpacker.unpackArrayHeader();
+
+        System.out.println("value BinaryHeader:"+ arrHeader);
+
+        for(inti = 0; i < arrHeader; i++) {
+
+            intbinaryHeader = unpacker.unpackBinaryHeader();
+
+            byte[] bytes = newbyte[binaryHeader];
+
+            unpacker.readPayload(bytes);
+
+            System.out.println("bytes hexString:"+ bytes2HexStr(bytes));
+
+        }
+
+        System.out.println("---------------------------------");
+
+        unpacker.close();
+
+    }
+
+
+
+public static String bytes2HexStr(byte[] bytes) {
+
+    char[] hexChars = newchar[bytes.length * 2];
+
+    for(intj = 0; j < bytes.length; j++) {
+
+        intv = bytes[j] & 0xFF;
+
+        hexChars[j * 2] = hexArray[v >>> 4];
+
+        hexChars[j * 2+ 1] = hexArray[v & 0x0F];
+
+    }
+
+    returnnewString(hexChars);
+
 }
