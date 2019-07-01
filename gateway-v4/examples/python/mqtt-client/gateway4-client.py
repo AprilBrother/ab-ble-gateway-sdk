@@ -1,27 +1,33 @@
 import time
 import paho.mqtt.client as mqtt
 import msgpack
+from beacontools import parse_packet
 
 def on_subscribe(mosq, obj, mid, granted_qos):
     print("Subscribed: " + str(mid))
 
 def on_message(mosq, obj, msg):
     for d in msgpack.unpackb(msg.payload)[b'devices']:
+      #parse iBeacon data
+      advData = d[8:]
+      adv = parse_packet(advData)
+      if adv == None:
+          return
+
       print("=============================================")
-      # adv type
-      print "type:", ord(d[0])
       print "mac:{:02X}{:02X}{:02X}{:02X}{:02X}{:02X}".format(ord(d[1]), ord(d[2]), ord(d[3]), ord(d[4]), ord(d[5]), ord(d[6]))
       print "rssi:", ord(d[7]) - 256
-      hex_chars = map(hex,map(ord,d))
-      del hex_chars[:8]
-      print "adv:", hex_chars
+
+      print("UUID: %s" % adv.uuid)
+      print("Major: %d" % adv.major)
+      print("Minor: %d" % adv.minor)
+      print("TX Power: %d" % adv.tx_power)
 
 def on_connect(mosq, obj,flags, rc):
     mqttTopic = "hello"
     print("Connected with result code "+str(rc))
     mqttc.subscribe(mqttTopic, 0)
     print("Connected")
-
 
 mqttHost    = "mqtt.bconimg.com"
 mqttPort    = 1883
