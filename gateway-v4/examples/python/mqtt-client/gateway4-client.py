@@ -12,7 +12,7 @@ def on_message(mosq, obj, msg):
       advData = d[8:]
       adv = parse_packet(advData)
       if adv == None:
-          return
+          continue
 
       print("=============================================")
       print "mac:{:02X}{:02X}{:02X}{:02X}{:02X}{:02X}".format(ord(d[1]), ord(d[2]), ord(d[3]), ord(d[4]), ord(d[5]), ord(d[6]))
