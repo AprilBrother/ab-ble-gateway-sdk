@@ -11,21 +11,22 @@ def on_message(mosq, obj, msg):
       #parse iBeacon data
       advData = d[8:]
       adv = parse_packet(advData)
-      if adv == None:
-          continue
 
       print("=============================================")
       print("mac: {:02X}{:02X}{:02X}{:02X}{:02X}{:02X}".format((d[1]), (d[2]), (d[3]), (d[4]), (d[5]), (d[6])))
       print("rssi:", (d[7]) - 256)
 
-      if hasattr(adv, "uuid"):
-          print("UUID: %s" % adv.uuid)
-          print("Major: %d" % adv.major)
-          print("Minor: %d" % adv.minor)
-          print("TX Power: %d" % adv.tx_power)
+      if adv == None:
+          print("adv:", advData);
+      else:
+          if hasattr(adv, "uuid"):
+              print("UUID: %s" % adv.uuid)
+              print("Major: %d" % adv.major)
+              print("Minor: %d" % adv.minor)
+              print("TX Power: %d" % adv.tx_power)
 
 def on_connect(mosq, obj,flags, rc):
-    mqttTopic = "/gw/4624"
+    mqttTopic = "gateway"
     print("Connected with result code "+str(rc))
     mqttc.subscribe(mqttTopic, 0)
     print("Connected")
