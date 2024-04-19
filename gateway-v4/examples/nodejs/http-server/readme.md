@@ -4,15 +4,21 @@ Http server for Gateway v4
 
 ## Requirement ##
 
-* Install nodejs and yarn
+* Install nodejs and pnpm
 * Install packages 
 ```
-yarn install
+pnpm i
 ```
 
 ## How To Run ##
 
 Open a http server at port 8000
+
+```
+pnpm start
+```
+
+or 
 
 ```
 node index.js

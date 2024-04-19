@@ -1,40 +1,27 @@
-const http = require('http');
-const msgpack = require('msgpack5')();
+const msgpack = require('msgpack5')()
+const express = require('express')
+const app = express()
 
-const server = http.createServer((req, res) => {
-  const chunks = [];
-  let size = 0;
+let serverPort = 8000
 
-  req.on('data', (chunk) => {
-    chunks.push(chunk);
-    size += chunk.length;
-  });
+app.use(express.raw({type: [
+    'application/msgpack',
+    'application/json'
+]}))
 
-  req.on('end', () => {
-    let data = null;
-    switch (chunks.length) {
-      case 0: data = chunks[0];
-        break;
-      case 1: data = chunks[0];
-        break;
-      default:
-        data = new Buffer(size);
-        for (let i = 0, pos = 0, len = chunks.length; i < len; i++) {
-          const chunk = chunks[i];
-          chunk.copy(data, pos);
-          pos += chunk.length;
-        }
-        break;
+app.post('/', function(req, res) {
+    let type = req.get('Content-Type')
+    let body = req.body
+
+    if(type == 'application/msgpack') {
+        let data = msgpack.decode(body)
+        console.log(data)
+    } else if(type == 'application/json') {
+        let data = JSON.parse(body.toString())
+        console.log(data)
     }
+    res.end()
+})
+app.listen(serverPort)
+console.log("Server start at port:", serverPort)
 
-    if (data == null) {
-        return;
-    }
-
-    data = msgpack.decode(data);
-    console.log(data);
-    res.end('post')
-  });
-});
-
-server.listen(8000);
