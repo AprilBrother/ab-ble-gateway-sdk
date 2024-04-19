@@ -2,7 +2,8 @@
     "scripts": {
         "start": "node index.mjs"
     },
-	"dependencies": {
-		"ws": "^8.13.0"
-	}
+    "dependencies": {
+        "ws": "^8.16.0",
+        "msgpack5": "^6.0.0"
+    }
 }
